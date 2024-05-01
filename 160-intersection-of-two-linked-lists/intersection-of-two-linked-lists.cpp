@@ -9,6 +9,9 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+
+        //base case
+        if(!headA || !headB)return NULL;
          ListNode* a=headA;
          ListNode* b=headB;
 
