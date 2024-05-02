@@ -1,20 +1,14 @@
 class Solution {
 public:
     int findMaxK(vector<int>& nums) {
-        vector<int>possible;
-        for(int i=0;i<nums.size();i++){
-            for(int j=i+1;j<nums.size();j++){
-                if(nums[i]+nums[j]==0){
-                    int put= max(nums[i],nums[j]);
-                    possible.push_back(put);
-                
-                }
-            }
+        int i=0,j=nums.size()-1;
+        sort(nums.begin(),nums.end());                                                                                                                                                                                                                                                   
+        while(i<j){
+            int diff=nums[i]+nums[j];
+            if(diff>0) j--;
+            else if(diff<0) i++;
+            else return nums[j];
         }
-        if(possible.empty()){
-            return -1;
-        }
-        int ans= *max_element(possible.begin(), possible.end());
-        return ans;
+        return -1;
     }
 };
