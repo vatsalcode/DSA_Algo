@@ -1,13 +1,13 @@
 class Solution {
 public:
    string createKey(const string& s1, const string& s2) {
-    return s1 + "," + s2;  // Use a comma to separate the two strings uniquely
+    return s1 + "," + s2;  
 }
 
-// Function to determine if s2 is a scrambled version of s1 using memoization
+ 
 bool isScrambleHelper(const string& s1, const string& s2, unordered_map<string, bool>& memo) {
-    string key = createKey(s1, s2);  // Create a unique key for the current substring pair
-    if (memo.count(key)) return memo[key];  // Return the stored result if already computed
+    string key = createKey(s1, s2);  
+    if (memo.count(key)) return memo[key];   
 
     if (s1 == s2) {
         memo[key] = true;
