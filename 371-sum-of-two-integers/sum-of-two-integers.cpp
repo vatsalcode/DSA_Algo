@@ -1,11 +1,16 @@
 class Solution {
 public:
+
+    int helper(int a, int b){
+        while(b!=0){
+            unsigned c=(a&b);
+            a=a^b;
+            b=c<<1;
+        }
+
+        return a;
+    }
     int getSum(int a, int b) {
-       while(b!=0){
-        unsigned carry= (a&b);
-        a=a^b;
-        b=carry<<1;
-       }
-       return a;
+       return helper(a,b);
     }
 };
