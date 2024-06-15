@@ -1,35 +1,38 @@
 class Solution {
 public:
     vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
-        int n=recipes.size();
-        unordered_map<string,int>map;
-        vector<int>check_ing(n,0);
-
-        for(auto i:supplies){
-            map[i]=1;
-        }
-
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(check_ing[j]==0){
-                    int flag=1;
-                    for(auto it: ingredients[j]){
-                        if(map.find(it)==map.end()){
-                            flag=0;
-                            break;
-                        }
-                    }
-                    if(flag==1){
-                        check_ing[j]=1;
-                        map[recipes[j]]=1;
-                    }
-                }
+        unordered_map<string,vector<string>> adj;
+        unordered_map<string,int> indegree;
+        for(int i=0;i<ingredients.size();i++)
+        {
+            for(auto j:ingredients[i])
+            {
+                adj[j].push_back(recipes[i]); 
+                indegree[recipes[i]]++;
             }
         }
-        vector<string>ans;
-        for(int i=0;i<n;i++){
-            if(check_ing[i]==1){
-                ans.push_back(recipes[i]);
+
+        queue<string> q;
+        for(auto i:supplies)
+        {
+            q.push(i);
+        }
+        
+        vector<string> ans;
+        while(!q.empty())
+        {
+            string node = q.front();
+            q.pop();
+
+            for(auto i:adj[node])
+            {
+                indegree[i]--;
+                if(indegree[i]==0)
+                {
+                    q.push(i);
+                    ans.push_back(i); //Bcz only leaf node are supplies
+                                      // all other node is recipes
+                }
             }
         }
         return ans;
