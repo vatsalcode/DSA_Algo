@@ -28,4 +28,3 @@ class Solution:
                         min_area=min(min_area,area)
 
         return 0 if min_area==float('inf')else min_area
-        
